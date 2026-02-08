@@ -3,14 +3,42 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Square({value, onSquareClick }) {
   return (
-    <>
-      
-    </>
+    <button className="border-2 border-white text-2xl font-bold h-8 p-0 text-center w-8"
+    onClick={onSquareClick}
+    >
+      {value}
+    </button>
   )
 }
 
-export default App
+export default function Board() {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+
+  function handleClick(i){
+    const nextSquares = squares.slice();
+    nextSquares[i] = 'X';
+    setSquares(nextSquares);
+  }
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex">
+        <Square value = {squares[0]} onSquareClick = { () => handleClick(0)}/>
+        <Square value = {squares[1]} onSquareClick = { () => handleClick(1)}/>
+        <Square value = {squares[2]} onSquareClick = { () => handleClick(2)}/>
+      </div>
+      <div className="flex">
+        <Square value = {squares[3]} onSquareClick = { () => handleClick(3)}/>
+        <Square value = {squares[4]} onSquareClick = { () => handleClick(4)}/>
+        <Square value = {squares[5]} onSquareClick = { () => handleClick(5)}/>
+      </div>
+      <div className="flex">
+        <Square value = {squares[6]} onSquareClick = { () => handleClick(6)}/>
+        <Square value = {squares[7]} onSquareClick = { () => handleClick(7)}/>
+        <Square value = {squares[8]} onSquareClick = { () => handleClick(8)}/>
+      </div>
+    </div>
+  )
+}
